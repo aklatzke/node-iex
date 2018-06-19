@@ -19,3 +19,6 @@ lib
 
 # Npm cache directory
 .npm
+
+# Execution files
+__index.js
