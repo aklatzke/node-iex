@@ -5,6 +5,10 @@ export const baseURL = "https://api.iextrading.com/1.0";
 export const buildBatchQuery = (symbols, types, range, filters) => {
     let query = "?";
 
+    if( symbols && ! Array.isArray(symbols) ) symbols = [symbols];
+    if( types && ! Array.isArray(types) ) types = [types];
+    if( filters && ! Array.isArray(filters) ) filters = [filters];
+
     query += symbols ? `symbols=${symbols.join(',')}` : '';
     query += types ? `&types=${types.join(',')}` : '';
     query += range ? `&range=${range}` : '';

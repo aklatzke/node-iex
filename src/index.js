@@ -1,12 +1,7 @@
 import httpClient from './clients/http';
 import wsClient from './clients/ws';
 
-export const iex = {
+export default {
     http: httpClient,
-    ws: wsClient,
-    getSymbols: () => httpClient.getSymbols()
-}
-
-export default function nodeIex() {
-
+    ws: wsClient
 }

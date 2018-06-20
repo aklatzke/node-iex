@@ -1,6 +1,6 @@
 import socket from 'socket.io-client';
 
-const bootstrapSocket = (socket) => {
+export const bootstrapSocket = (socket) => {
     socket.hash = {};
 
     socket.subscribe = (targets, callback) => {
@@ -11,7 +11,7 @@ const bootstrapSocket = (socket) => {
         socket.emit('subscribe', targets.join(','));
     };
 
-    socket.unsubsribe = (targets) => {
+    socket.unsubscribe = (targets) => {
         targets = Array.isArray(targets) ? targets : [targets];
 
         targets.forEach(item => delete socket.hash[item]);
@@ -22,7 +22,7 @@ const bootstrapSocket = (socket) => {
     return socket;
 }
 
-const bootstrapDeepSocket = (socket) => {
+export const bootstrapDeepSocket = (socket) => {
     socket.hash = {};
 
     socket.subscribe = (targets, channels, callback) => {
@@ -37,7 +37,7 @@ const bootstrapDeepSocket = (socket) => {
         }));
     };
 
-    socket.unsubsribe = (targets) => {
+    socket.unsubscribe = (targets) => {
         targets = Array.isArray(targets) ? targets : [targets];
 
         targets.forEach(item => delete socket.hash[item]);
@@ -49,7 +49,6 @@ const bootstrapDeepSocket = (socket) => {
 }
 
 export default {
-
     tops: () => {
         let conn = socket('https://ws-api.iextrading.com/1.0/tops');
 

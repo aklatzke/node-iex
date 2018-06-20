@@ -19,9 +19,9 @@
     "compile:watch": "npm run compile -- --watch",
     "lint": "eslint src test",
     "lint:fix": "npm run lint -- --fix",
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "test": "mocha --compilers js:babel-core/register --recursive --exit",
     "test:watch": "npm run test -- --watch",
-    "test:cov": "babel-node $(npm bin)/istanbul cover $(npm bin)/_mocha -- --recursive",
+    "test:cov": "babel-node $(npm bin)/istanbul cover $(npm bin)/_mocha -- --recursive --exit",
     "preversion": "npm run lint && npm test",
     "version": "npm run compile && git add -A lib",
     "postversion": "git push --follow-tags"
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "nyc": "^12.0.2",
     "socket.io-client": "^2.1.1"
   }
 }
