@@ -1,8 +1,5 @@
 const iex = require('./lib')
 
-let iexHTTP = iex.iex.http;
-let iexWS = iex.iex.ws().then(socket => {
-    socket.emit('subscribe', 'snap,fb');
-})
+iex.iex.http.stats.historicalDaily().then(data=> { console.log(data) });
 
 module.exports = iex;
