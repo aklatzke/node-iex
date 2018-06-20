@@ -3,7 +3,7 @@ Connector/SDK for the IEX Stock API
 
 This is a fairly faithful adaptation of the IEX Stock API. You can check the usage section to see how it's used, but it generally follows a few rules with very few deviations.
 
-It implements both the HTTP and websocket APIs (note: IEX only has websocket implementions for some of their API routes, but all available are included).
+It implements both the HTTP and WebSocket APIs (note: IEX only has WebSocket implementions for some of their API routes, but all available are included).
 
 ## Installation
 ```bash
@@ -22,7 +22,7 @@ The top-level `iex` exposes two clients:
 ```javascript
 let httpClient = iex.http;
 ```
-- The websocket client:
+- The WebSocket client:
 ```javascript
 let wsClient = iex.ws;
 ```
@@ -158,9 +158,88 @@ Stats methods do not require a symbol and can be accessed through `httpClient.st
 - `historical( date: String, format: String )`
 - `historicalDaily( date: String, format: String, last: Number)`
 
-### Feedback
+#### WebSocket Client
+
+The WebSocket client is quite a bit simpler than the HTTP client. There are only a few methods implemented in the IEX client and they are all mirrored here.
+
+There are three methods available to the WebSocket client, and all are listed below after the basic instructions:
+
+Initialization:
+
+```javascript
+wsClient.{method_name}().then(socket => {
+
+})
+```
+
+Channel Subscription & Unsubscribe:
+
+```javascript
+wsClient.{method_name}().then(socket => {
+    // subscribes to fb & SNAP
+    socket.subscribe(['fb', 'SNAP'], function(data){
+        // this callback will run only if the data is from fb or SNAP
+    })
+    // Unsubscribes only from fb
+    socket.unsubscribe('fb');
+})
+```
+
+The three available methods are:
+
+- `tops`
+- `last`
+- `deep`
+
+Examples of each (note that DEEP has a slightly different API):
+
+##### tops:
+
+```javascript
+wsClient.tops().then(socket => {
+    // subscribes to fb & SNAP
+    socket.subscribe(['fb', 'SNAP'], function(data){
+        // this callback will run only if the data is from fb or SNAP
+    })
+    // Unsubscribes only from fb
+    socket.unsubscribe('fb');
+})
+```
+
+##### last:
+
+```javascript
+wsClient.last().then(socket => {
+    // subscribes to fb & SNAP
+    socket.subscribe(['fb', 'SNAP'], function(data){
+        // this callback will run only if the data is from fb or SNAP
+    })
+    // Unsubscribes only from fb
+    socket.unsubscribe('fb');
+})
+```
+
+##### deep:
+
+Deep contains an extra "channels" argument (see documentation):
+
+```javascript
+wsClient.deep().then(socket => {
+    // subscribes to fb & SNAP
+    socket.subscribe(['fb', 'SNAP'], ['book', 'auction'], function(data){
+        // this callback will run only if the data is from fb or SNAP
+    })
+    // Unsubscribes only from fb
+    socket.unsubscribe('fb');
+})
+```
+
+
+
+#### Feedback
 
 If you have any feedback, please leave an issue and I'll try to respond as soon as I can! Thanks for using the package.
 
-### License
+#### License
 MIT
+
