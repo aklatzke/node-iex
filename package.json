@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "name": "node-iex",
   "description": "Connector/SDK for the IEX Stock API",
   "author": "Andrew Klatzke <andrewklatzke@gmail.com>",
